@@ -1,0 +1,32 @@
+<---- Technician Login Valid Credentials ---->
+email_address = tamilselvan@coducer.com
+password = Password@123
+
+<---- Login Invalid Credentials ---->
+INV_email_address = tamilselvann@coducer.com
+INV_email_address1 = tamilselvann@coducercom
+INV_email_address2 = panneerselvam@coducer.com
+INV_password = Password@1234
+INV_withoutNO_password = Passworddd@
+INVpassword_withoutspl_character = Password123
+INVpassword_withoutupper_character = password@123
+INVpassword_short_character = Pass
+
+<---- Forgot password Credentials ---->
+Forgot_email_address = tamilselvan@coducer.com
+INV_OTP = 123456
+
+<---- Reset password Credentials ---->
+Newpassword = Password@123
+Confirmpassword = Password@123
+INV_confirmpassword = password@1234
+
+
+<---- Personal profile page ---->
+members_search_text = panneer
+
+Alt_Phone_number = +919677775555
+Whatsapp_Phone_number = +919677775556
+IQMA_number = 123456
+Licence_number = KA0134442E2
+
