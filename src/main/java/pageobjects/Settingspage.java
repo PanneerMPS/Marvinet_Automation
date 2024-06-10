@@ -3,9 +3,11 @@ package pageobjects;
 import java.io.FileInputStream;
 import java.time.Duration;
 import java.util.Properties;
+import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -166,10 +168,16 @@ public class Settingspage extends Base {
 	}
 
 	@FindBy(xpath = "//android.widget.EditText[@text=\"Tamil\"]")
-	private WebElement Settings_personalinfo_name;
+	private WebElement Settings_personalinfo_name, Settings_personalinfo_namedisplay;
 
 	public void Settings_personalinfo_name() {
-		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_name)).sendKeys(prop.getProperty("name"));
+		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_name)).sendKeys(Keys.DELETE);
+		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_name_emt)).sendKeys(prop.getProperty("name"));
+	}
+	
+	public void Settings_personalinfo_namedisplay() {
+		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_namedisplay)).isDisplayed();
+		AssertJUnit.assertTrue(Settings_personalinfo_namedisplay.isDisplayed());
 	}
 
 	@FindBy(xpath = "//android.widget.EditText[@text=\"+917708183591\"]")
@@ -177,15 +185,24 @@ public class Settingspage extends Base {
 
 	public void Settings_personalinfo_contact_number() {
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_contact_number))
-				.sendKeys(prop.getProperty("Contact_number"));
+		.sendKeys(Keys.CLEAR);
+		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_contact_emt))
+		.sendKeys(prop.getProperty("Contact_number"));
 	}
-
+	
+	private static String generateUniqueIQMANumber(String baseIQMANumber) {
+		Random rand = new Random();
+		return baseIQMANumber + rand.nextInt(10000); 
+	}
 	@FindBy(xpath = "//android.widget.EditText[@text=\"Enter IQAMA ID\"]")
 	private WebElement Settings_personalinfo_IQAMA;
 
 	public void Settings_personalinfo_IQAMA() {
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_IQAMA))
-				.sendKeys(prop.getProperty("IQAMA_number"));
+		.sendKeys(Keys.CLEAR);
+		String uniqueIQMANumber = generateUniqueIQMANumber(prop.getProperty("IQAMA_number"));
+		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_IQAMA))
+				.sendKeys(uniqueIQMANumber);
 	}
 
 	@FindBy(xpath = "//android.widget.EditText[@text=\"Enter alternate number (Optional)\"]")
@@ -193,13 +210,15 @@ public class Settingspage extends Base {
 
 	public void Settings_personalinfo_altnumber() {
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_altnumber))
-				.sendKeys(prop.getProperty("IQAMA_number"));
+				.sendKeys(prop.getProperty("Contact_number"));
 	}
 
 	@FindBy(xpath = "//android.widget.EditText[@text=\"+918808008801\"]")
 	private WebElement Settings_personalinfo_wappnumber;
 
 	public void Settings_personalinfo_wappnumber() {
+		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_wappnumber))
+		.sendKeys(Keys.CLEAR);
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_wappnumber))
 				.sendKeys(prop.getProperty("Whatsapp_number"));
 	}
@@ -208,8 +227,7 @@ public class Settingspage extends Base {
 	private WebElement Settings_personalinfo_save;
 
 	public void Settings_personalinfo_save() {
-		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_save))
-				.sendKeys(prop.getProperty("Whatsapp_number"));
+		wait.until(ExpectedConditions.elementToBeClickable(Settings_personalinfo_save)).click();
 	}
 
 	@FindBy(xpath = "//android.widget.EditText[@text=\"Enter whatsapp number\"]")
@@ -225,29 +243,62 @@ public class Settingspage extends Base {
 
 	public void Settings_personalinfo_location() {
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_location))
-				.sendKeys(prop.getProperty("Location"));
+		.sendKeys(Keys.CLEAR);
+		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_location))
+				.sendKeys(prop.getProperty("Location"+Keys.ARROW_DOWN +Keys.ENTER));
 	}
 
 	@FindBy(xpath = "//android.widget.EditText[@text=\"Enter biography\"]")
 	private WebElement Settings_personalinfo_bio;
 
 	public void Settings_personalinfo_bio() {
+		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_bio))
+		.sendKeys(Keys.CLEAR);
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_bio)).sendKeys(prop.getProperty("Biography"));
 	}
 
-	@FindBy(xpath = "//android.widget.EditText[@text=\"Enter workspace name\"]")
+	@FindBy(xpath = "//android.widget.EditText")
 	private WebElement Settings_personalinfo_name_emt;
 
 	public void Settings_personalinfo_name_emt() {
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_name_emt)).sendKeys(prop.getProperty("name"));
 	}
 
-	@FindBy(xpath = "//android.widget.EditText[@text=\"Enter contact number\"]")
+	@FindBy(xpath = "//android.widget.EditText[@text=\"\"]")
 	private WebElement Settings_personalinfo_contact_emt;
 
 	public void Settings_personalinfo_contact_emt() {
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_contact_emt))
 				.sendKeys(prop.getProperty("Contact_number"));
 	}
+	
+	@FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]")
+	private WebElement Settings_personalinfo_confirm_yes;
 
+	public void Settings_personalinfo_confirm_yes() {
+		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_confirm_yes)).click();
+	}
+	
+	@FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]")
+	private WebElement Settings_personalinfo_confirm_no;
+
+	public void Settings_personalinfo_confirm_no() {
+		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_confirm_no)).click();
+	}
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Personal']")
+	private WebElement personalprofile_Success_display;
+
+	public String checkvalid_error_display() {
+		try {
+			WebElement successMessageElement = wait.until(ExpectedConditions.visibilityOf(personalprofile_Success_display));
+			String message = successMessageElement.getText().trim();
+			System.out.println("Error message displayed: " + message);
+			return message;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 }
+

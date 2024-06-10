@@ -1,5 +1,7 @@
 package Stepdefinitions;
 
+import static org.junit.Assert.assertEquals;
+
 import org.openqa.selenium.WebDriver;
 
 import Hooks.Testhooks;
@@ -29,6 +31,48 @@ public class Settings extends Base {
     	settingspage.personal_profile_display();
     }
 
+    @And("Click personal profile option")
+    public void Click_personal_profile_option() {
+    	settingspage.personal_profile_click();
+    }
+    
+    @Then("Check the personal profile page fields")
+    public void Check_the_personal_profile_page_fields() {
+    	settingspage.Settings_personalinfo_namedisplay();
+    }
+    
+    @And("Update the personal profile fields")
+    public void Update_the_personal_profile_fields() {
+    	settingspage.Settings_personalinfo_name();
+    	settingspage.Settings_personalinfo_contact_number();
+    	settingspage.Settings_personalinfo_IQAMA();
+    	settingspage.Settings_personalinfo_wappnumber();
+    	settingspage.Settings_personalinfo_location();
+    	settingspage.Settings_personalinfo_bio();
+    }
+    
+    @And("Click Save profile button")
+    public void Click_Save_profile_button() {
+    	settingspage.Settings_personalinfo_save();
+    }
+    
+    @And("Click Yes btn in confirmation popup")
+    public void Click_Yes_btn_in_confirmation_popup() {
+    	settingspage.Settings_personalinfo_confirm_yes();
+    }
+    
+    @Then("^Check the personal profile updated successfully as \"([^\"]*)\"$")
+    public void Check_the_personal_profile_updated_successfully(String expectedMessage) {
+    	 String actualMessage = settingspage.checkvalid_error_display();
+         String normalizedExpectedMessage = normalizeWhitespace(expectedMessage);
+         String normalizedActualMessage = normalizeWhitespace(actualMessage);
+         System.out.println("Expected Message: " + normalizedExpectedMessage);
+         System.out.println("Actual Message: " + normalizedActualMessage);  
+         assertEquals(normalizedExpectedMessage, normalizedActualMessage);
+    }
+    private String normalizeWhitespace(String input) {
+        return input.replaceAll("\\s+", " ").trim();
+    }
 }
 
 
