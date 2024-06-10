@@ -23,10 +23,9 @@ INV_confirmpassword = password@1234
 
 
 <---- Personal profile page ---->
-members_search_text = panneer
-
-Alt_Phone_number = +919677775555
-Whatsapp_Phone_number = +919677775556
-IQMA_number = 123456
-Licence_number = KA0134442E2
-
+name = Tamil
+Contact_number = +917708183591
+Whatsapp_number = +918808008801
+IQAMA_number = 123456
+Location = Bangalore
+Biography = Demo Testing
