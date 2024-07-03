@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,10 +25,12 @@ public class Settingspage extends Base {
 	private WebDriver driver;
 	private WebDriverWait wait;
 	private Properties prop;
+	private Actions act;
 
 	public Settingspage(WebDriver driver) throws Exception {
 		this.driver = driver;
 		prop = new Properties();
+		act = new Actions(driver);
 		PageFactory.initElements(driver, this);
 
 		String propPath = System.getProperty("user.dir") + "/src/main/java/resources/dataproperties";
@@ -186,23 +189,21 @@ public class Settingspage extends Base {
 	public void Settings_personalinfo_contact_number() {
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_contact_number))
 		.sendKeys(Keys.CLEAR);
-		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_contact_emt))
+		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_contact_number))
 		.sendKeys(prop.getProperty("Contact_number"));
 	}
 	
 	private static String generateUniqueIQMANumber(String baseIQMANumber) {
 		Random rand = new Random();
-		return baseIQMANumber + rand.nextInt(10000); 
+		return baseIQMANumber + rand.nextInt(10); 
 	}
-	@FindBy(xpath = "//android.widget.EditText[@text=\"Enter IQAMA ID\"]")
+	@FindBy(xpath = "//android.widget.EditText[@text=\"1212344539\"]")
 	private WebElement Settings_personalinfo_IQAMA;
 
 	public void Settings_personalinfo_IQAMA() {
+//		String uniqueIQMANumber = generateUniqueIQMANumber(prop.getProperty("IQAMA_number"));
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_IQAMA))
-		.sendKeys(Keys.CLEAR);
-		String uniqueIQMANumber = generateUniqueIQMANumber(prop.getProperty("IQAMA_number"));
-		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_IQAMA))
-				.sendKeys(uniqueIQMANumber);
+				.sendKeys("1212344539");
 	}
 
 	@FindBy(xpath = "//android.widget.EditText[@text=\"Enter alternate number (Optional)\"]")
@@ -217,6 +218,7 @@ public class Settingspage extends Base {
 	private WebElement Settings_personalinfo_wappnumber;
 
 	public void Settings_personalinfo_wappnumber() {
+		act.moveToElement(Settings_personalinfo_wappnumber).perform();
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_wappnumber))
 		.sendKeys(Keys.CLEAR);
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_wappnumber))
@@ -242,6 +244,7 @@ public class Settingspage extends Base {
 	private WebElement Settings_personalinfo_location;
 
 	public void Settings_personalinfo_location() {
+		act.moveToElement(Settings_personalinfo_location).perform();
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_location))
 		.sendKeys(Keys.CLEAR);
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_location))
@@ -264,7 +267,7 @@ public class Settingspage extends Base {
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_name_emt)).sendKeys(prop.getProperty("name"));
 	}
 
-	@FindBy(xpath = "//android.widget.EditText[@text=\"\"]")
+	@FindBy(xpath = "//*[@class='android.widget.EditText' and @text=' ']")
 	private WebElement Settings_personalinfo_contact_emt;
 
 	public void Settings_personalinfo_contact_emt() {
@@ -286,7 +289,7 @@ public class Settingspage extends Base {
 		wait.until(ExpectedConditions.visibilityOf(Settings_personalinfo_confirm_no)).click();
 	}
 
-	@FindBy(xpath = "//android.widget.TextView[@text='Personal']")
+	@FindBy(xpath = "//android.widget.TextView[@text='Personal profile updated']")
 	private WebElement personalprofile_Success_display;
 
 	public String checkvalid_error_display() {

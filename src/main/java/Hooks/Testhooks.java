@@ -1,5 +1,6 @@
 package Hooks;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import org.apache.logging.log4j.LogManager;
@@ -35,6 +36,7 @@ public class Testhooks extends Base {
 		LOGGER.info("Application got launched");
 		signinpage = new Signinpage(driver);
 		initializeWait();
+		setNetworkCondition(scenario);
 		LOGGER.info("Navigated to application");
 		System.out.println("Login page opened");
 
@@ -42,6 +44,40 @@ public class Testhooks extends Base {
 		Thread.sleep(1000);
 	}
 
+	  private void setNetworkCondition(Scenario scenario) throws IOException {
+	        String tags = scenario.getSourceTagNames().toString();
+	        if (tags.contains("@2G")) {
+	            setNetwork("2G");
+	        } else if (tags.contains("@3G")) {
+	            setNetwork("3G");
+	        } else if (tags.contains("@4G")) {
+	            setNetwork("4G");
+	        } else if (tags.contains("@5G")) {
+	            setNetwork("5G");
+	        }
+	    }
+
+	    private void setNetwork(String networkType) throws IOException {
+	        String command = "";
+	        switch (networkType) {
+	            case "2G":
+	                command = "adb shell svc data disable && adb shell svc wifi disable && adb shell svc data enable && adb shell settings put global preferred_network_mode 1";
+	                System.out.println("<<<<<<<<<<<<<<<<<<<<<Setting network condition to 2G>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	                break;
+	            case "3G":
+	                command = "adb shell svc data disable && adb shell svc wifi disable && adb shell svc data enable && adb shell settings put global preferred_network_mode 2";
+	                break;
+	            case "4G":
+	                command = "adb shell svc data disable && adb shell svc wifi disable && adb shell svc data enable && adb shell settings put global preferred_network_mode 3";
+	                break;
+	            case "5G":
+	                command = "adb shell svc data disable && adb shell svc wifi disable && adb shell svc data enable && adb shell settings put global preferred_network_mode 20";
+	                break;
+	        }
+	        Runtime.getRuntime().exec(command);
+	    }
+
+	    
 	@After
 	public void tearDown(Scenario scenario) throws Exception {
 		if (driver != null) {

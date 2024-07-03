@@ -1,7 +1,7 @@
 Feature: Signin feature test scenarios
 Registered user should be able to login to access the al-arabia features
 
-@signin @signin01 @validcredentials @regression @sanity @all
+@signin @signin01 @validcredentials @regression @sanity @all @2G
 Scenario Outline: T001 Login with valid credentials
 When User enters valid email address
 And Enter valid password
@@ -10,7 +10,7 @@ And Clicks on Sign in button
 Then User should login successfully
 Then Al-Arabia dashboard should display successfully
 
-@signin @signin02 @invalidemailandpassword @sanity @regression @all
+@signin @signin02 @invalidemailandpassword @sanity @regression @all @3G
 Scenario Outline: T002 Login with invalid credentials
 When User enters invalid email address
 And Enter invalid password
@@ -21,7 +21,7 @@ Then User should get a invalid email and password error message as "<errorMessag
       | errorMessage        |
       | Invalid credential  |
 
-@signin @signin03 @invalidpassword @smoke @regression @all
+@signin @signin03 @invalidpassword @smoke @regression @all @4G
 Scenario Outline: T003 Login with valid email address and invalid password
 When User enters valid email address
 And Enter invalid password Password
@@ -29,7 +29,7 @@ And Click password field eye icon
 And Click email field
 Then User should get must contain one number error message 
 
-@signin @signin04 @invalidemail @smoke @regression @all
+@signin @signin04 @invalidemail @smoke @regression @all @5G
 Scenario Outline: T004 Login with invalid email address and valid password
 When User enters invalid email address without dot
 And Enter valid password

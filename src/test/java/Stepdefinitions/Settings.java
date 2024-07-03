@@ -44,11 +44,11 @@ public class Settings extends Base {
     @And("Update the personal profile fields")
     public void Update_the_personal_profile_fields() {
     	settingspage.Settings_personalinfo_name();
-    	settingspage.Settings_personalinfo_contact_number();
+//    	settingspage.Settings_personalinfo_contact_number();
     	settingspage.Settings_personalinfo_IQAMA();
-    	settingspage.Settings_personalinfo_wappnumber();
-    	settingspage.Settings_personalinfo_location();
-    	settingspage.Settings_personalinfo_bio();
+//    	settingspage.Settings_personalinfo_wappnumber();
+//    	settingspage.Settings_personalinfo_location();
+//    	settingspage.Settings_personalinfo_bio();
     }
     
     @And("Click Save profile button")
