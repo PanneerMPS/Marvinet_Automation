@@ -1,7 +1,7 @@
 Feature: Signin feature test scenarios
 Registered user should be able to login to access the al-arabia features
 
-@signin @signin01 @validcredentials @regression @sanity @all @2G
+@signin @signin01 @validcredentials @regression @sanity @all @5G
 Scenario Outline: T001 Login with valid credentials
 When User enters valid email address
 And Enter valid password
