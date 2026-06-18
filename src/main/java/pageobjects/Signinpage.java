@@ -49,7 +49,7 @@ public class Signinpage extends Base {
 	@FindBy(xpath = "//android.view.ViewGroup[@resource-id=\"card\"]/android.widget.EditText[2]")
 	private WebElement passwordField;
 
-	@FindBy(xpath = "//android.view.ViewGroup[@resource-id=\"card\"]/android.view.ViewGroup[3]")
+	@FindBy(xpath = "//android.widget.TextView[@text=\"Sign in\"]")
 	private WebElement signinButton;
 
 	@FindBy(xpath = "//android.widget.TextView[@text=\"Invalid E-mail address or phone number\"]")
@@ -81,7 +81,7 @@ public class Signinpage extends Base {
 
 	// Page Methods
 	public void enterValidEmail() {
-//    	 wait.until(ExpectedConditions.elementToBeClickable(allow)).click();
+    	 wait.until(ExpectedConditions.elementToBeClickable(allow)).click();
 		wait.until(ExpectedConditions.visibilityOf(emailField_or_phoneNo)).sendKeys(prop.getProperty("email_address"));
 		LOGGER.info("User enters valid email address");
 	}
@@ -144,7 +144,7 @@ public class Signinpage extends Base {
 	}
 
 	public void clickSignInButton() {
-		wait.until(ExpectedConditions.visibilityOf(signinButton)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(signinButton)).click();
 		LOGGER.info("User clicks on signin button");
 	}
 

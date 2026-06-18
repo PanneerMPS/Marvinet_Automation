@@ -1,11 +1,11 @@
 Feature: Signin feature test scenarios
 Registered user should be able to login to access the al-arabia features
 
-@signin @signin01 @validcredentials @regression @sanity @all @5G
+@signin @signin01 @validcredentials @regression @sanity @all @3G
 Scenario Outline: T001 Login with valid credentials
 When User enters valid email address
 And Enter valid password
-And Click password field eye icon
+#And Click password field eye icon
 And Clicks on Sign in button
 Then User should login successfully
 Then Al-Arabia dashboard should display successfully

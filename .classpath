@@ -26,17 +26,19 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry exported="true" kind="con" path="org.testng.TESTNG_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/cucumber-core-7.17.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/cucumber-gherkin-7.17.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/cucumber-junit-7.17.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/cucumber-testng-7.17.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
 		<attributes>
+			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/coducer/Downloads/selenium-java-4.1.0.jar"/>
-	<classpathentry kind="lib" path="/home/coducer/Downloads/java-client-8.0.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/selenium-java-4.1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/cucumber-core-7.21.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/cucumber-gherkin-7.21.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/cucumber-java-7.21.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/cucumber-junit-7.21.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/cucumber-testng-7.21.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/testng-7.10.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/coducer/Downloads/cucumber-plugin-7.21.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

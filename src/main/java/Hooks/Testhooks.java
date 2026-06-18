@@ -75,7 +75,13 @@ public class Testhooks extends Base {
                 command = "adb shell svc data disable && adb shell svc wifi disable && adb shell svc data enable && adb shell settings put global preferred_network_mode 20";
                 break;
         }
-        Runtime.getRuntime().exec(command);
+        try {
+			Runtime.getRuntime().exec(command).waitFor();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @After
