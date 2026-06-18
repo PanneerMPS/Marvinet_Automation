@@ -1,29 +1,36 @@
 package Hooks;
 
-import java.io.IOException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 
+import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
+//import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import pageobjects.Signinpage;
+import pageobjects.Signup_page;
 import resources.Base;
-import utils.NetworkCondition;
+import utils.NetworkInterceptor;
 
 public class Testhooks extends Base {
-    public WebDriver driver;
-    public WebDriverWait wait;
-    public Signinpage signinpage;
 
-    private static Logger LOGGER = LogManager.getLogger(Testhooks.class);
+    @Getter
+    public WebDriver driver;
+
+    public WebDriverWait wait;
+    public Signup_page signuppage;
+
+    private static final Logger LOGGER = LogManager.getLogger(Testhooks.class);
 
     public void initializeWait() {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -31,77 +38,80 @@ public class Testhooks extends Base {
 
     @Before
     public void setup(Scenario scenario) throws Exception {
-        LOGGER = LogManager.getLogger(Testhooks.class.getName());
+
         LOGGER.info("Execution Started");
+
         driver = initializeDriver();
-        LOGGER.info("Application got launched");
-        signinpage = new Signinpage(driver);
+
+        LOGGER.info("Browser launched successfully");
+
+//        if (driver instanceof ChromeDriver) {
+//            devTools = ((ChromeDriver) driver).getDevTools();
+//            devTools.createSession();
+//            
+//            networkInterceptor = new NetworkInterceptor(devTools);
+//            networkInterceptor.startIntercepting();
+//        } else {
+//            throw new IllegalStateException("WebDriver is not an instance of ChromeDriver");
+//        }
+
+        signuppage = new Signup_page(driver);
+
+        driver.get(prop.getProperty("Marvinet_Userflow_URL"));
+
         initializeWait();
-        setNetworkCondition(scenario);
-        LOGGER.info("Navigated to application");
-        System.out.println("Login page opened");
 
-        System.out.println("** Execution started for scenario -" + scenario.getName());
+        LOGGER.info("Navigated to URL");
+
+        Robot robot = new Robot();
+
+        for (int i = 0; i < 3; i++) {
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_SUBTRACT);
+            robot.keyRelease(KeyEvent.VK_SUBTRACT);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
+
+        LOGGER.info("Page is zoomed out");
+
+        System.out.println(
+                "** Execution started for scenario -" + scenario.getName());
+
         Thread.sleep(1000);
+	
+//		String bearerToken = networkInterceptor.getBearerToken();
+//        if (bearerToken != null) {
+//            LOGGER.info("Captured Bearer Token: " + bearerToken);
+//        } else {
+//            LOGGER.warn("Bearer Token not found!");
+//        }
     }
+//	@After
+//	public void tearDown(Scenario scenario) throws Exception {
+//
+//		if (driver != null) {
+//			driver.quit();
+//			LOGGER.info("Browser got closed");
+//			System.out.println("-- Browser got closed --");
+//			System.out.println(
+//					"** Execution ended for scenario -" + scenario.getName());
+//		}
+//	}
 
-    private void setNetworkCondition(Scenario scenario) throws IOException {
-        String tags = scenario.getSourceTagNames().toString();
-        if (tags.contains("@2G")) {
-            setNetwork(NetworkCondition.TWO_G);
-        } else if (tags.contains("@3G")) {
-            setNetwork(NetworkCondition.THREE_G);
-        } else if (tags.contains("@4G")) {
-            setNetwork(NetworkCondition.FOUR_G);
-        } else if (tags.contains("@5G")) {
-            setNetwork(NetworkCondition.FIVE_G);
-        }
-    }
-
-    private void setNetwork(NetworkCondition networkCondition) throws IOException {
-        String command = "";
-        switch (networkCondition) {
-            case TWO_G:
-                command = "adb shell svc data disable && adb shell svc wifi disable && adb shell svc data enable && adb shell settings put global preferred_network_mode 1";
-                System.out.println("<<<<<<<<<<<<<<<<<<<<<Setting network condition to 2G>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                break;
-            case THREE_G:
-                command = "adb shell svc data disable && adb shell svc wifi disable && adb shell svc data enable && adb shell settings put global preferred_network_mode 2";
-                break;
-            case FOUR_G:
-                command = "adb shell svc data disable && adb shell svc wifi disable && adb shell svc data enable && adb shell settings put global preferred_network_mode 3";
-                break;
-            case FIVE_G:
-                command = "adb shell svc data disable && adb shell svc wifi disable && adb shell svc data enable && adb shell settings put global preferred_network_mode 20";
-                break;
-        }
-        try {
-			Runtime.getRuntime().exec(command).waitFor();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    }
-
-    @After
-    public void tearDown(Scenario scenario) throws Exception {
-        if (driver != null) {
-            driver.quit();
-            LOGGER.info("Application got closed");
-            System.out.println("-- Application got closed --");
-            System.out.println("** Execution ended for scenario -" + scenario.getName());
-        }
-    }
-
-    @AfterStep
-    public void addScreenshot(Scenario scenario) {
-        final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        if (scenario.isFailed()) {
-            scenario.attach(screenshot, "image/png", scenario.getName());
-            LOGGER.info("Failed scenario screenshot got captured" + scenario.getName());
-        }
-    }
+//    @AfterStep
+//    public void addScreenshot(Scenario scenario) {
+//
+//        final byte[] screenshot =
+//                ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//
+//        scenario.attach(screenshot, "image/png", scenario.getName());
+//
+//        if (scenario.isFailed()) {
+//            LOGGER.info("Failed scenario screenshot captured");
+//        } else {
+//            LOGGER.info("Passed scenario screenshot captured");
+//        }
+//    }
 
     public WebDriver getDriver() {
         return driver;
