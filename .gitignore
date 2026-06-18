@@ -1,5 +1,11 @@
-.idea/
 target/
 bin/
-*.log
+logs/
 test-output/
+allure-results/
+allure-report/
+.idea/
+.project
+.classpath
+.settings/
+*.log
