@@ -1,3 +1,5 @@
+.idea/
+target/
+bin/
 *.log
-/target/
-/test-output/
+test-output/
