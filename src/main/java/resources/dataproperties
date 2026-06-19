@@ -5,13 +5,24 @@ browser = chrome
 Marvinet_Userflow_URL = https://marvinet.synthdev.space/sign-in
 
 <---- Signup Valid Credentials ---->
-signup_email = panneerselvam+2000@coducer.com
+signup_email = panneerselvam+1@coducer.com
 signup_mobileNumber = 3344543323
 signup_newpassword = Password@321
 signup_confirm_password = Password@321
+Gmail_URL = https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F%3Fservice%3Dmail%26flowName%3DGlifWebSignIn%26flowEntry%3DAccountChooser%26ec%3Dasw-gmail-globalnav-signin&dsh=S-1457883568%3A1781855537308981&uj=gafb-gmail_asw-globalnav-en&flowName=GlifWebSignIn&flowEntry=ServiceLogin&ifkv=AcDsRvxFP_cmM7TFL5bubQp1v81J28nKLPJCSHHICk6a_R-eAaUmW8qptEuBCO9WIaupJmG5kGMR1g
 
-<---- Login Invalid Credentials ---->
-
+<---- Complete your profile ---->
+FirstName = Selvam
+LastName = M
+PhoneNo = 3344554433
+Country = India
+TaxNo = 23
+CompanyName = Coducer
+Website = coducer.com
+Company_Address = Kudlu
+Region = Karnataka
+City = Bangalore
+Zipcode = 344543
 
 <---- Forgot password Credentials ---->
 

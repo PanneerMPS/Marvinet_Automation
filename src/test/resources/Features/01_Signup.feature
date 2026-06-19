@@ -12,4 +12,15 @@ And Enter New Password
 And Enter Confirm Password
 And Click I Agree Checkbox
 And Click Join Marvinet Button
-Then Check Signed Up Successfully
+And Check Signed Up Successfully
+And Go to mail signin page
+And Gmail confirm account process
+Then Check confirm account got success	
+Then Check 2FA page showing successfully
+And Click Skip in 2FA page
+Then Check Complete Profile page showing successfully
+And Complete the Complete profile
+Then Check Verify OTP page showing successfully
+And Click Veriy and Proceed button
+Then Check Verify KYC page showing successfully
+And Click Veriy KYC button
